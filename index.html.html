@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health & Wellness Pharmacy</title>
+    <meta name="description" content="Health & Wellness Pharmacy provides premium healthcare solutions, prescription fulfillment, ED medications, and personalized service. Your health is our priority.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2a7de1;
+            --secondary: #3bb4b4;
+            --accent: #ff6b6b;
+            --dark: #2d3748;
+            --light: #f8fafc;
+            --gray: #e2e8f0;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Montserrat', sans-serif; color: var(--dark); line-height: 1.6; background-color: var(--light); scroll-behavior: smooth; }
+        h1,h2,h3,h4 { font-family: 'Playfair Display', serif; margin-bottom: 1rem; }
+        
+        /* Container */
+        .container { width: 90%; max-width: 1200px; margin: 0 auto; padding: 0 15px; }
+        
+        /* Header */
+        header { background-color:white; box-shadow:0 2px 10px rgba(0,0,0,0.1); position:fixed; width:100%; top:0; z-index:1000; }
+        .header-container { display:flex; justify-content:space-between; align-items:center; padding:1rem 0; }
+        .logo h1 { font-size:1.8rem; color:var(--primary); } .logo span { color:var(--secondary); }
+        nav ul { display:flex; list-style:none; } nav ul li { margin-left:2rem; }
+        nav ul li a { text-decoration:none; color:var(--dark); font-weight:500; transition:color 0.3s; }
+        nav ul li a:hover { color:var(--primary); }
+        .nav-btn { display:none; background:none; border:none; font-size:1.5rem; cursor:pointer; color:var(--primary); }
+        
+        /* Hero */
+        .hero { padding:8rem 0 5rem; background:linear-gradient(rgba(42,125,225,0.85),rgba(59,180,180,0.75)), url('https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1500&q=80') no-repeat center center/cover; color:white; text-align:center; }
+        .hero-content { max-width:800px; margin:0 auto; } 
+        .hero h2 { font-size:3rem; margin-bottom:1.5rem; } 
+        .hero p { font-size:1.2rem; margin-bottom:2rem; }
+        .btn { display:inline-block; padding:0.8rem 2rem; background-color:var(--accent); color:white; border:none; border-radius:50px; font-weight:600; text-decoration:none; transition:all 0.3s; cursor:pointer; }
+        .btn:hover { background-color:#ff5252; transform:translateY(-3px); box-shadow:0 5px 15px rgba(255,107,107,0.4); }
+        
+        /* Sections */
+        .services, .about { padding:5rem 0; background:white; } 
+        .ed-meds, .contact { padding:5rem 0; background:var(--gray); }
+        .section-title { text-align:center; margin-bottom:3rem; }
+        .section-title h2 { font-size:2.5rem; color:var(--primary); position:relative; display:inline-block; }
+        .section-title h2::after { content:''; position:absolute; bottom:-10px; left:50%; transform:translateX(-50%); width:80px; height:3px; background-color:var(--secondary); }
+        
+        /* Services Grid */
+        .services-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:2rem; }
+        .service-card { background:var(--light); border-radius:10px; padding:2rem; text-align:center; box-shadow:0 5px 15px rgba(0,0,0,0.05); transition:all 0.3s; }
+        .service-card:hover { transform:translateY(-10px); box-shadow:0 10px 25px rgba(0,0,0,0.1); } 
+        .service-icon { font-size:3rem; color:var(--primary); margin-bottom:1rem; } 
+        .service-card h3 { font-size:1.5rem; margin-bottom:1rem; }
+        
+        /* Medications Grid */
+        .meds-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:2rem; }
+        .med-card { background:white; border-radius:10px; overflow:hidden; box-shadow:0 5px 15px rgba(0,0,0,0.05); transition:all 0.3s; }
+        .med-card:hover { transform:translateY(-5px); box-shadow:0 10px 20px rgba(0,0,0,0.1); }
+        .med-img { height:200px; background-color:#ddd; background-position:center; background-size:cover; }
+        .med-info { padding:1.5rem; } 
+        .med-info h3 { font-size:1.3rem; color:var(--primary); } 
+        .med-price { font-weight:700; color:var(--accent); margin:0.5rem 0; }
+        
+        /* About */
+        .about-content { display:grid; grid-template-columns:1fr 1fr; gap:3rem; align-items:center; }
+        .about-img { border-radius:10px; overflow:hidden; box-shadow:0 5px 15px rgba(0,0,0,0.1); }
+        .about-img img { width:100%; display:block; } 
+        .about-text h2 { font-size:2.2rem; color:var(--primary); margin-bottom:1.5rem; }
+        
+        /* Contact */
+        .contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:3rem; }
+        .contact-info h3 { font-size:1.5rem; color:var(--primary); margin-bottom:1.5rem; }
+        .contact-details p { margin-bottom:0.5rem; display:flex; align-items:center; } 
+        .contact-details i { margin-right:10px; color:var(--primary); }
+        .contact-form input, .contact-form textarea { width:100%; padding:0.8rem; margin-bottom:1rem; border:1px solid #ddd; border-radius:5px; font-family:'Montserrat',sans-serif; }
+        .contact-form textarea { min-height:150px; }
+        
+        /* Footer */
+        footer { background-color:var(--dark); color:white; padding:3rem 0 1rem; }
+        .footer-content { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:2rem; margin-bottom:2rem; }
+        .footer-section h3 { font-size:1.3rem; margin-bottom:1.5rem; color:var(--secondary); }
+        .footer-links { list-style:none; } .footer-links li { margin-bottom:0.5rem; } 
+        .footer-links a { color:white; text-decoration:none; transition:color 0.3s; } .footer-links a:hover { color:var(--secondary); }
+        .social-icons { display:flex; gap:1rem; margin-top:1rem; }
+        .social-icons a { display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; background:rgba(255,255,255,0.1); border-radius:50%; color:white; transition:all 0.3s; }
+        .social-icons a:hover { background-color:var(--secondary); transform:translateY(-3px); }
+        .footer-bottom { text-align:center; padding-top:2rem; border-top:1px solid rgba(255,255,255,0.1); }
+        
+        /* WhatsApp Button */
+        #whatsappBtn { position:fixed; bottom:20px; right:20px; z-index:3000; width:60px; height:60px; background:#25D366; border-radius:50%; display:flex; justify-content:center; align-items:center; box-shadow:0 5px 15px rgba(0,0,0,0.3); cursor:pointer; }
+        #whatsappBtn i { font-size:28px; color:white; }
+        
+        /* Chat Modal */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 2000; justify-content: center; align-items: center; }
+        .modal-content { background: white; border-radius: 10px; padding: 2rem; width: 90%; max-width: 400px; position: relative; animation: fadeIn 0.3s ease-in-out; }
+        .close-modal { position: absolute; top: 10px; right: 15px; cursor: pointer; font-size: 1.5rem; }
+        
+        /* Privacy Notice */
+        .privacy-notice {
+            background: #f0f7ff;
+            border-left: 4px solid var(--primary);
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0 5px 5px 0;
+            font-size: 0.9rem;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn { from{opacity:0; transform:translateY(-10px);} to{opacity:1; transform:translateY(0);} }
+        
+        /* Responsive */
+        @media(max-width:992px){ .about-content,.contact-grid{ grid-template-columns:1fr; } .about-img{ order:-1; } }
+        @media(max-width:768px){
+            .nav-btn{ display:block; }
+            nav ul{ position:fixed; top:70px; left:-100%; width:100%; height:calc(100vh - 70px); background:white; flex-direction:column; align-items:center; justify-content:center; transition:all 0.3s ease; }
+            nav ul.active{ left:0; } nav ul li{ margin:1.5rem 0; }
+            .hero h2{ font-size:2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container header-container">
+            <div class="logo"><h1>Health <span>Wellness</span></h1></div>
+            <button class="nav-btn" aria-label="Toggle navigation"><i class="fas fa-bars"></i></button>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#ed-meds">ED Medications</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="container hero-content">
+            <h2>Your Health is Our Priority</h2>
+            <p>Discover premium healthcare solutions and personalized service at Health & Wellness Pharmacy. We're committed to helping you live your healthiest life.</p>
+            <a href="#contact" class="btn">Get in Touch</a>
+        </div>
+    </section>
+
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title"><h2>Our Services</h2></div>
+            <div class="services-grid">
+                <div class="service-card"><div class="service-icon"><i class="fas fa-prescription"></i></div><h3>Prescription Services</h3><p>Fast and accurate prescription fulfillment with expert consultation from our licensed pharmacists.</p></div>
+                <div class="service-card"><div class="service-icon"><i class="fas fa-heartbeat"></i></div><h3>Health Screenings</h3><p>Comprehensive health screenings including blood pressure, cholesterol, and glucose testing.</p></div>
+                <div class="service-card"><div class="service-icon"><i class="fas fa-pills"></i></div><h3>Medication Therapy Management</h3><p>Personalized consultations to optimize your medication regimen and improve health outcomes.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="ed-meds" id="ed-meds">
+        <div class="container">
+            <div class="section-title"><h2>Men's Health Medications</h2></div>
+            <div class="privacy-notice">
+                <p><strong>Your privacy is important to us.</strong> All consultations and purchases are handled with complete confidentiality by our licensed healthcare professionals.</p>
+            </div>
+            <div class="meds-grid">
+                <div class="med-card">
+                    <div class="med-img" style="background-image:url('https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');"></div>
+                    <div class="med-info">
+                        <h3>Viagra</h3>
+                        <p>Effective treatment for erectile dysfunction with proven results.</p>
+                        <p class="med-price">From $49.99</p>
+                        <a href="#" class="btn inquire-btn">Consult Now</a>
+                    </div>
+                </div>
+                <div class="med-card">
+                    <div class="med-img" style="background-image:url('https://images.unsplash.com/photo-1591744539985-5e43697c2355?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');"></div>
+                    <div class="med-info">
+                        <h3>Cialis</h3>
+                        <p>Long-lasting ED treatment that works for up to 36 hours.</p>
+                        <p class="med-price">From $59.99</p>
+                        <a href="#" class="btn inquire-btn">Consult Now</a>
+                    </div>
+                </div>
+                <div class="med-card">
+                    <div class="med-img" style="background-image:url('https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');"></div>
+                    <div class="med-info">
+                        <h3>Levitra</h3>
+                        <p>Fast-acting medication that helps achieve erections when sexually stimulated.</p>
+                        <p class="med-price">From $54.99</p>
+                        <a href="#" class="btn inquire-btn">Consult Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>About Health & Wellness Pharmacy</h2>
+                    <p>Since 2005, Health & Wellness Pharmacy has been serving the community with dedication and care. Our team of experienced pharmacists and healthcare professionals is committed to providing personalized service and the highest quality medications.</p>
+                    <p>We believe in a holistic approach to health, offering not just medications but also advice, screenings, and ongoing support to help you achieve your wellness goals.</p>
+                    <p>Your health is our mission, and we're here to support you every step of the way.</p>
+                </div>
+                <div class="about-img"><img src="https://images.unsplash.com/photo-1550572017-edd951b55104?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Pharmacy interior"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-title"><h2>Contact Us</h2></div>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Get in Touch</h3>
+                    <div class="contact-details">
+                        <p><i class="fas fa-map-marker-alt"></i> 329 21st Ave N STE 3, Nashville, TN 37203, United States</p>
+                        <p><i class="fas fa-phone"></i> <a href="tel:+18504629659">+1 850-462-9659</a></p>
+                        <p><i class="fas fa-envelope"></i> info@healthwellness.com</p>
+                        <p><i class="fas fa-clock"></i> Mon-Fri: 8am-8pm, Sat: 9am-5pm, Sun: 10am-4pm</p>
+                    </div>
+                    <div class="social-icons">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="mainContactForm">
+                        <input type="text" placeholder="Your Name" required>
+                        <input type="email" placeholder="Your Email" required>
+                        <input type="tel" placeholder="Your Phone">
+                        <textarea placeholder="Your Message" required></textarea>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section"><h3>Health Wellness</h3><p>Your trusted partner in health and wellness. We provide premium pharmaceutical care with a personal touch.</p></div>
+                <div class="footer-section"><h3>Quick Links</h3><ul class="footer-links"><li><a href="#home">Home</a></li><li><a href="#services">Services</a></li><li><a href="#ed-meds">ED Medications</a></li><li><a href="#about">About Us</a></li><li><a href="#contact">Contact</a></li></ul></div>
+                <div class="footer-section"><h3>Services</h3><ul class="footer-links"><li><a href="#">Prescription Services</a></li><li><a href="#">Health Screenings</a></li><li><a href="#">Medication Therapy Management</a></li><li><a href="#">Immunizations</a></li><li><a href="#">Health Consultations</a></li></ul></div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2025 Health Wellness Pharmacy. All rights reserved.</p></div>
+        </div>
+    </footer>
+
+    <!-- Chat Modal -->
+    <div id="chatModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeModal">&times;</span>
+            <h3>Private Consultation</h3>
+            <p>Contact us regarding your health needs. All inquiries are confidential.</p>
+            <form id="chatForm">
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <input type="tel" placeholder="Your Phone" required>
+                <textarea placeholder="How can we help you?" required></textarea>
+                <button type="submit" class="btn" style="width:100%;">Send Message</button>
+            </form>
+            <p style="margin-top:1rem; font-size:0.9rem;">Or call us: <a href="tel:+18504629659">+1 850-462-9659</a></p>
+            <p style="font-size:0.9rem;">Address: 329 21st Ave N STE 3, Nashville, TN 37203, United States</p>
+        </div>
+    </div>
+
+    <!-- WhatsApp Button -->
+    <div id="whatsappBtn" aria-label="Contact via WhatsApp"><i class="fab fa-whatsapp"></i></div>
+
+    <script>
+        // Navigation
+        const navBtn = document.querySelector('.nav-btn'); 
+        const nav = document.querySelector('nav ul');
+        const navIcon = navBtn.querySelector('i');
+
+        navBtn.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            if (nav.classList.contains('active')) {
+                navIcon.classList.replace('fa-bars', 'fa-times');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling when menu is open
+            } else {
+                navIcon.classList.replace('fa-times', 'fa-bars');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Close mobile menu when clicking links
+        document.querySelectorAll('nav ul li a').forEach(link => {
+            link.addEventListener('click', () => { 
+                nav.classList.remove('active');
+                navIcon.classList.replace('fa-times', 'fa-bars');
+                document.body.style.overflow = 'auto';
+            });
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Chat Modal
+        const chatModal = document.getElementById('chatModal');
+        const closeModal = document.getElementById('closeModal');
+
+        document.querySelectorAll('.inquire-btn').forEach(btn => {
+            btn.addEventListener('click', e => {
+                e.preventDefault();
+                chatModal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        closeModal.addEventListener('click', () => {
+            chatModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+
+        window.addEventListener('click', e => {
+            if (e.target === chatModal) {
+                chatModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Form submissions
+        document.getElementById('chatForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // In a real implementation, you would send this data to a server
+            alert('Thank you! Your confidential message has been sent. We will contact you shortly.');
+            this.reset();
+            chatModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+
+        document.getElementById('mainContactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // In a real implementation, you would send this data to a server
+            alert('Thank you for your message! We will get back to you soon.');
+            this.reset();
+        });
+
+        // WhatsApp Button
+        const whatsappBtn = document.getElementById('whatsappBtn');
+        whatsappBtn.addEventListener('click', () => {
+            window.open('https://wa.me/18504629659?text=Hello%20Health%20Wellness%20Pharmacy,%20I%20have%20a%20question', '_blank');
+        });
+
+        // Close mobile menu when scrolling (on touch devices)
+        let touchStartY = 0;
+        window.addEventListener('touchstart', e => {
+            touchStartY = e.changedTouches[0].screenY;
+        });
+
+        window.addEventListener('touchmove', e => {
+            const touchEndY = e.changedTouches[0].screenY;
+            // If user is scrolling down significantly
+            if (touchEndY - touchStartY < -30 && nav.classList.contains('active')) {
+                nav.classList.remove('active');
+                navIcon.classList.replace('fa-times', 'fa-bars');
+                document.body.style.overflow = 'auto';
+            }
+        });
+    </script>
+
+</body>
+</html>
